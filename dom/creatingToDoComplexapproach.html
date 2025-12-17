@@ -1,0 +1,43 @@
+<!--
+in the earlier approach we were using a lot of raw html ie when we created a newdiv element. this can result into lot of erros so to avoid it we use 2n approach 
+// 1 approach :
+// create parendiv element and write raw html to create another div and button into it 
+// append this parent div on the body
+
+//2 approach
+// create fresh div element and create fresh button
+// creash parentdiv . append div and button onto it and then append this parent div on the body -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>creating to do with complex approach</title>
+</head>
+<body>
+    <h1>my to do app</h1>
+    <input type="text" placeholder="write your todo" >
+    <button onclick="addtodo()"> add the todo</button>
+    <script>
+        let ctr = 0;
+        function deletetodo(ctr){
+            const del = document.getElementById(ctr);
+            del.parentNode.removeChild(del);
+        }
+        function addtodo(){
+            const value = document.querySelector("input").value;
+            const spanEl = document.createElement("span");
+            spanEl.innerHTML = value;
+            const buttonEl = document.createElement("button");
+            buttonEl.setAttribute("onclick",deletetodo(ctr));
+            buttonEl.innerHTML = "delete";
+            const parentdiv = document.createElement("div");
+            parentdiv.setAttribute("id",ctr)
+            parentdiv.appendChild(spanEl);
+            parentdiv.appendChild(buttonEl);
+            document.querySelector("body").appendChild(parentdiv);
+            ctr++;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>to do app</title>
+</head>
+<body>
+    <h1> my first to do app </h1>
+    <input type="text" placeholder="write your todo">
+    <button onclick="addtodo()"> add a todo </button>
+</body>
+<script>
+    ctr = 0;
+    count = 0;
+   function todoDelete(ctr){
+        const element = document.getElementById(ctr);
+        const parentelement = element.parentNode;
+        parentelement.removeChild(element);
+        count--;
+      }
+    function addtodo(){
+        const inputel = document.querySelector("input");
+        const val = inputel.value;
+        const newDivele = document.createElement("div");
+        newDivele.setAttribute("id",ctr);//whener i create a new div element give it a new id so that i can delete the div element using its id 
+        
+        newDivele.innerHTML = "<div>"+count+". "+val+'</div><button onclick = "todoDelete('+ctr+' )">deletetodo</button>';//string concatenation is done here 
+        count++;
+        ctr++;
+        document.querySelector("body").appendChild(newDivele);
+
+    }
+</script>
+</html>

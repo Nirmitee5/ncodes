@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body id = "hello">
+    <h1> write your todoss</h1>
+    <h4>1.write a journal</h4>
+    <h4>2.write a book</h4>
+    <h4>3.write a copy</h4>
+    <button onclick="deleteatodo()"> delete a todo</button>
+    <button onclick="addingelements()"> add a todo</button>
+    <script>
+        //function to delete a todo 
+        //1. get the element that you want to delete
+        //2 find the parent of that element using element.aprentNode\
+        //3.on apply remove child on that parent element
+      function deleteatodo(){
+        const element = document.querySelector("h4");
+        const parentelement = element.parentNode;
+        parentelement.removeChild(element);
+      }
+      function addingelements(){
+        const element = document.createElement("h4"); // this element is outside of the dom
+        element.innerHTML = "4.do laundry";
+        // const parentelement = element.parentNode; you cant do this because this element is outside of the dom
+        const parentelement = document.getElementById("hello");
+
+        parentelement.appendChild(element);
+      }
+    </script>
+</body>
+</html>

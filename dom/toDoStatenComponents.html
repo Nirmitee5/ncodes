@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>statesnComponents</title>
+</head>
+<body>
+    <input type="text" placeholder="enter your todo">
+    <button onclick="addtodo()">add to do</button>
+    <button onclick="deletelast()">delte last todo</button>
+    <button onclick="deletefirst()">delte fisttodo</button>
+    <div id = "todolist"></div>
+    <script>
+        let todos = [];//state variable :  array of the objects 
+        let ids= 0;
+        function addtodo(){
+            todos.push({
+                title:document.querySelector("input").value,
+                id:ids
+            
+            })
+            render();
+            ids++;
+            
+        }
+        function deletelast(){
+            todos.pop();
+            render();
+        }
+        function deletefirst(){
+            todos.splice(0,1);
+            render();
+        }
+       function deletetodo(id) {
+        for (let i = 0; i < todos.length; i++) {
+        if (todos[i].id === id) {
+            todos.splice(i, 1); // remove that todo
+            break;
+        }
+       }
+    render();
+     }
+        function component(todo){
+                const div = document.createElement("div");
+                div.setAttribute("id",todo.id);
+                const hele = document.createElement("h3");
+                hele.innerHTML= todo.title;
+                const buttonel = document.createElement("button");
+                buttonel.innerHTML = "delete to do";
+                buttonel.onclick = function(){
+                    deletetodo(todo.id);
+                }
+                div.append(hele);
+                div.append(buttonel);
+                return div;
+        }
+        function render(){//same as react framework "RECONCILATION" : updated states are put on the dom
+            document.getElementById("todolist").innerHTML = "";
+            for(let i = 0;i<todos.length;i++){
+                const element = component(todos[i]);
+                document.getElementById("todolist").appendChild(element);
+            }
+        }
+    </script>
+</body>
+</html>

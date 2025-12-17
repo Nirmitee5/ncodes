@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input type="text" placeholder="write your todo :)">
+  <button onclick="addtodo()">add todo </button>
+  <button onclick="del1todo()">delete 1st todo </button>
+  <button onclick="delltodo()">delete last todo </button>
+  <div id = "todolist"></div>
+</body>
+<script>
+  let idx = 0;
+  let todo = [];
+  function addtodo(){
+    todo.push({
+      title:document.querySelector("input").value,
+      id:idx
+    });
+    idx++;
+    render();
+  }
+  function del1todo(){
+    todo.splice(0,1);
+    render();
+  }
+    function delltodo(){
+    todo.pop();
+    render();
+  }
+  function deletetodo(idx){
+     for(let i = 0;i<todo.length;i++){
+      if(todo[i].id==idx){
+        todo.splice(i,1);
+        break;
+      }
+     }
+     render();
+  }
+  function component(todo){
+    const divele = document.createElement("div");
+    divele.setAttribute("id",todo.id);
+    const hele = document.createElement("h3");
+    hele.innerHTML = todo.title;
+    const buttonele = document.createElement("button");
+    buttonele.innerHTML = "Delete to do";
+    const currentidx = todo.id;
+    buttonele.onclick = function(){
+      deletetodo(currentidx);
+    }
+    divele.append(hele);
+    divele.append(buttonele);
+    return divele;
+  }
+  function render(){
+    document.getElementById("todolist").innerHTML = "";
+    for(let i = 0;i<todo.length;i++){
+       const compo = component(todo[i]);
+       document.getElementById("todolist").appendChild(compo);
+    }
+  }
+</script>
+</html>
